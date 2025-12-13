@@ -6,16 +6,23 @@ public class JDBCDemo {
         String user = "postgres";
         String password = "root";
 
+        String stuName = "Rakesh";
+        int stuMarks = 95;
+
 //        String query="SELECT sname FROM students WHERE sid = 1"; // READ
 //        String query = "SELECT * FROM students"; // READ
 //        String query = "INSERT INTO students(sname, marks) VALUES('Gauri', 85)"; // CREATE
 //        String query = "UPDATE students SET sname='Mouli' WHERE sid=4"; // UPDATE
-        String query = "DELETE FROM students WHERE sid=4";
+//        String query = "DELETE FROM students WHERE sid=4";
+        String query = "INSERT INTO students(sname, marks) VALUES (?, ?)";
 
         Connection conn = DriverManager.getConnection(url, user, password);
         System.out.println("Connection established");
 
-        Statement st = conn.createStatement();
+//        Statement st = conn.createStatement();
+        PreparedStatement st = conn.prepareStatement(query);
+        st.setString(1, stuName);
+        st.setInt(2, stuMarks);
 
 //        ResultSet rs = st.executeQuery(query);
 
@@ -34,7 +41,8 @@ public class JDBCDemo {
 //        boolean status = st.execute(query);
 //        System.out.println(status);
 
-        st.execute(query);
+//        st.execute(query);
+        st.execute();
 
         conn.close();
         System.out.println("Connection closed");

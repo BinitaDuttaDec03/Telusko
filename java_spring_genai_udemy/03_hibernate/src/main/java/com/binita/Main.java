@@ -9,11 +9,7 @@ import org.hibernate.cfg.Configuration;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     static void main() {
-        Student s1 = new Student();
-        s1.setRollNo(105);
-        s1.setName("Riya");
-        s1.setMarks(99);
-
+        Student s1 = null;
 
         SessionFactory sf = new Configuration()
                 .addAnnotatedClass(com.binita.Student.class)
@@ -21,10 +17,7 @@ public class Main {
                 .buildSessionFactory();
         Session session = sf.openSession();
 
-        Transaction transaction = session.beginTransaction();
-
-        session.persist(s1);
-        transaction.commit();
+        s1 = session.get(Student.class, 101);
 
         sf.close();
 

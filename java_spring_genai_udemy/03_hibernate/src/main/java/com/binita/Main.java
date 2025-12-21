@@ -10,18 +10,18 @@ import org.hibernate.cfg.Configuration;
 public class Main {
     static void main() {
         Student s1 = new Student();
-        s1.setRollNo(104);
-        s1.setName("Navin");
-        s1.setMarks(100);
+        s1.setRollNo(105);
+        s1.setName("Riya");
+        s1.setMarks(99);
 
-        Configuration cfg = new Configuration();
-        cfg.addAnnotatedClass(com.binita.Student.class);
-        cfg.configure();
 
-        SessionFactory sf = cfg.buildSessionFactory();
+        SessionFactory sf = new Configuration()
+                .addAnnotatedClass(com.binita.Student.class)
+                .configure()
+                .buildSessionFactory();
         Session session = sf.openSession();
 
-        Transaction transaction=session.beginTransaction();
+        Transaction transaction = session.beginTransaction();
 
         session.persist(s1);
         transaction.commit();

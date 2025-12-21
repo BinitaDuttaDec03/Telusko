@@ -10,8 +10,8 @@ import org.hibernate.cfg.Configuration;
 public class Main {
     static void main() {
         Student s1 = new Student();
-        s1.setRollNo(101);
-        s1.setName("Binita");
+        s1.setRollNo(104);
+        s1.setName("Navin");
         s1.setMarks(100);
 
         Configuration cfg = new Configuration();

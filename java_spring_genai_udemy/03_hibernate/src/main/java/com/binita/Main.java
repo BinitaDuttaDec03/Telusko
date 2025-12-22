@@ -9,24 +9,24 @@ import org.hibernate.cfg.Configuration;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     static void main() {
-        Student s1 = null;
-
+        Alien a1 = new Alien();
+        a1.setAid(101);
+        a1.setAname("Navin");
+        a1.setAtech("Java");
 
         SessionFactory sf = new Configuration()
-                .addAnnotatedClass(com.binita.Student.class)
+                .addAnnotatedClass(com.binita.Alien.class)
                 .configure()
                 .buildSessionFactory();
         Session session = sf.openSession();
 
         Transaction transaction = session.beginTransaction();
 
-        s1 = session.find(Student.class, 105);
-
-        session.remove(s1);
+        session.persist(a1);
         transaction.commit();
 
         sf.close();
 
-        System.out.println(s1);
+        System.out.println(a1);
     }
 }

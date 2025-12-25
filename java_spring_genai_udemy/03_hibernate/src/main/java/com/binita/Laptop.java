@@ -1,42 +1,33 @@
 package com.binita;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Laptop {
     @Id
     private int lid;
-    private String brand;
-    private String model;
-    private int ram;
-    @ManyToOne
-    private Alien alien;
+    private String lbrand;
+    private String lmodel;
+    private int lram;
+    @ManyToMany(mappedBy = "laptops") // mapping done by alien table - this avoids the creation of a laptop_alien table
+    private List<Alien> aliens;
 
-    public String getBrand() {
-        return brand;
+    public List<Alien> getAliens() {
+        return aliens;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setAliens(List<Alien> aliens) {
+        this.aliens = aliens;
     }
 
-    public String getModel() {
-        return model;
+    public String getLbrand() {
+        return lbrand;
     }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public int getRam() {
-        return ram;
-    }
-
-    public void setRam(int ram) {
-        this.ram = ram;
+    public void setLbrand(String lbrand) {
+        this.lbrand = lbrand;
     }
 
     public int getLid() {
@@ -47,22 +38,30 @@ public class Laptop {
         this.lid = lid;
     }
 
-    public Alien getAlien() {
-        return alien;
+    public String getLmodel() {
+        return lmodel;
     }
 
-    public void setAlien(Alien alien) {
-        this.alien = alien;
+    public void setLmodel(String lmodel) {
+        this.lmodel = lmodel;
+    }
+
+    public int getLram() {
+        return lram;
+    }
+
+    public void setLram(int lram) {
+        this.lram = lram;
     }
 
     @Override
     public String toString() {
         return "Laptop{" +
-                "alien=" + alien +
+                "aliens=" + aliens +
                 ", lid=" + lid +
-                ", brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", ram=" + ram +
+                ", lbrand='" + lbrand + '\'' +
+                ", lmodel='" + lmodel + '\'' +
+                ", lram=" + lram +
                 '}';
     }
 }

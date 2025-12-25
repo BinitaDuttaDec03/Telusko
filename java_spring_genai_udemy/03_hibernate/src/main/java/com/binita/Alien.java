@@ -2,15 +2,16 @@ package com.binita;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Alien {
     @Id
     private int aid;
     private String aname;
     private String atech;
-
-    @OneToOne
-    private Laptop laptop;
+    @OneToMany(mappedBy = "alien")
+    private List<Laptop> laptops;
 
     public int getAid() {
         return aid;
@@ -32,16 +33,16 @@ public class Alien {
         return atech;
     }
 
+    public List<Laptop> getLaptops() {
+        return laptops;
+    }
+
+    public void setLaptops(List<Laptop> laptops) {
+        this.laptops = laptops;
+    }
+
     public void setAtech(String atech) {
         this.atech = atech;
-    }
-
-    public Laptop getLaptop() {
-        return laptop;
-    }
-
-    public void setLaptop(Laptop laptop) {
-        this.laptop = laptop;
     }
 
     @Override
@@ -50,7 +51,7 @@ public class Alien {
                 "aid=" + aid +
                 ", aname='" + aname + '\'' +
                 ", atech='" + atech + '\'' +
-                ", laptop=" + laptop +
+                ", laptops=" + laptops +
                 '}';
     }
 }

@@ -2,13 +2,14 @@ package com.binita;
 
 import jakarta.persistence.*;
 
-//@Entity(name = "alien_table")
 @Entity
 public class Alien {
     @Id
     private int aid;
     private String aname;
     private String atech;
+
+    @OneToOne
     private Laptop laptop;
 
     public int getAid() {

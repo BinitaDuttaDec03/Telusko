@@ -9,29 +9,31 @@ import org.hibernate.cfg.Configuration;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     static void main() {
-//        Laptop l1=new Laptop();
-//        l1.setBrand("Asus");
-//        l1.setModel("Rog");
-//        l1.setRam(16);
-//
-//        Alien a1 = new Alien();
-//        a1.setAid(101);
-//        a1.setAname("Navin");
-//        a1.setAtech("Java");
-//        a1.setLaptop(l1);
+        Laptop l1=new Laptop();
+        l1.setLid(1);
+        l1.setBrand("Asus");
+        l1.setModel("Rog");
+        l1.setRam(16);
 
-        Alien a1 = null;
+        Alien a1 = new Alien();
+        a1.setAid(101);
+        a1.setAname("Navin");
+        a1.setAtech("Java");
+        a1.setLaptop(l1);
 
         SessionFactory sf = new Configuration()
                 .addAnnotatedClass(com.binita.Alien.class)
+                .addAnnotatedClass(com.binita.Laptop.class)
                 .configure()
                 .buildSessionFactory();
         Session session = sf.openSession();
 
-//        Transaction transaction = session.beginTransaction();
+        Transaction transaction = session.beginTransaction();
 
-        a1 = session.find(Alien.class, 101);
-//        transaction.commit();
+        session.persist(l1);
+        session.persist(a1);
+
+        transaction.commit();
 
         sf.close();
 
